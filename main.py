@@ -1,9 +1,11 @@
 from posixpath import split
+import string
 import sys
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import numpy as np
 from matplotlib.figure import Figure
 from PyQt5 import QtWidgets, QtGui
+import sympy
 from manigui import Ui_MainWindow
 
 
@@ -28,18 +30,23 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.get_user_function)
 
     def get_user_function(self):
-        self.user_function = self.ui.lineEdit.text()
-        print(self.user_function)
+        self.user_function = self.ui.lineEdit.text().strip()
 
-        added_function_parts = self.user_function.strip().split("+")
-        function_parts = []
-        for part in added_function_parts:
-            for p in part.split("-"):
-                function_parts.append(p)
+        # first check for valid input function
+        valid = ["x", "1", "2", "3", "4", "5", "6",
+                 "7", "8", "9", "0", "*", "/", "-", "^", "+"]
+        flag = True
+        for char in self.user_function:
+            if char not in valid:
+                QtWidgets.QMessageBox.about(
+                    self, "Error", f"Char {char} is not valid!")
+                flag = False
+                break
+        if flag:
+            x = sympy.symbols("x")
+            y_values = self.user_function.subs(x, 2)
+            print(y_values)
 
-
-# function to test:
-# x^2 + 5
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
