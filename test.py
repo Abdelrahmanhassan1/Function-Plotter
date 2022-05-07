@@ -1,4 +1,4 @@
-from ast import operator
+
 import numpy as np
 import matplotlib.pyplot as plt
 import sympy
@@ -31,32 +31,37 @@ while True:
     if index == len(function):
         added_expressions.append(new_expression)
         break
+
     char = function[index]
     if char == "x":
         new_expression *= x
     # if having a power character
     elif char == "^":
         index += 1
-        power = int(function[index])
+        power = np.double(function[index])
+
         while(power > 1):
-            new_expression *= x
+            if function[index-2] == "x":
+                new_expression *= x
+            elif function[index-2].isdigit():
+                new_expression *= np.double(function[index-2])
             power -= 1
     elif char == "*":
         index += 1
         if(function[index] == "x"):
             new_expression *= x
         elif(function[index].isdigit()):
-            new_expression *= int(function[index])
+            new_expression *= np.double(function[index])
 
     elif char == "/":
         index += 1
         if(function[index] == "x"):
             new_expression /= x
         elif(function[index].isdigit()):
-            new_expression /= int(function[index])
+            new_expression /= np.double(function[index])
 
     elif char.isdigit():
-        new_expression *= int(char)
+        new_expression *= np.double(char)
     elif char == "+":
         if index != 0:
             added_expressions.append(new_expression)
@@ -91,3 +96,5 @@ print(y_axis)
 
 plt.plot(x_axis, y_axis)
 plt.show()
+
+print(np.linspace(1.2, 3, 20))
