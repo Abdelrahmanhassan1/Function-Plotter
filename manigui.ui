@@ -14,7 +14,7 @@
    <string>Function Plotter</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_4">
+   <layout class="QVBoxLayout" name="verticalLayout_8">
     <item>
      <widget class="QSplitter" name="splitter_2">
       <property name="orientation">
@@ -124,20 +124,36 @@
                </item>
               </layout>
              </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
+                <widget class="QPushButton" name="pushButton">
+                 <property name="font">
+                  <font>
+                   <family>Ubuntu Condensed</family>
+                   <pointsize>16</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Plot</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_2">
+                 <property name="font">
+                  <font>
+                   <pointsize>13</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Save Figure</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
             </layout>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton">
-             <property name="font">
-              <font>
-               <family>Ubuntu Condensed</family>
-               <pointsize>16</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Plot</string>
-             </property>
-            </widget>
            </item>
           </layout>
          </item>

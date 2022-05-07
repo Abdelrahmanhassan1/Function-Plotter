@@ -35,6 +35,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # handling plot button action
         self.ui.pushButton.clicked.connect(self.get_user_function)
+        self.ui.pushButton_2.clicked.connect(self.show_msg)
 
     def get_user_function(self):
         self.user_function = self.ui.function_input.text().strip()
@@ -168,6 +169,16 @@ class MainWindow(QtWidgets.QMainWindow):
     def raise_error(self, error_message):
         QtWidgets.QMessageBox.about(
             self, "Error", error_message)
+
+    def show_msg(self):
+        figname, ok = QtWidgets.QInputDialog.getText(
+            self, 'input dialog', 'Name of Figure:')
+        if ok:
+            try:
+                self.function_plotter_figure.savefig(
+                    f"plot_figures/{figname}.png")
+            except Exception as e:
+                self.raise_error("Error Figure Not Saved")
 
 
 if __name__ == '__main__':
