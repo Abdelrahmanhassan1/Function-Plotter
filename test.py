@@ -1,4 +1,4 @@
-
+from more_itertools import first
 import numpy as np
 import matplotlib.pyplot as plt
 import sympy
@@ -6,7 +6,7 @@ import sympy
 # function to test:
 # x^2 + 5
 
-function = "5*x^2 - x^3"
+function = "5+5"
 
 # first check
 # check if all the equation has numbers, operators, and x nothimg more
@@ -61,7 +61,25 @@ while True:
             new_expression /= np.double(function[index])
 
     elif char.isdigit():
-        new_expression *= np.double(char)
+        first_index = index
+        while True:
+            # print(index)
+            index += 1
+            if index == len(function):
+                break
+            next_char = function[index]
+            if next_char.isdigit() or next_char == ".":
+                continue
+            else:
+                break
+
+        last_index = index
+        index -= 1
+        if first_index == last_index:
+            new_expression *= np.double(function[first_index])
+        else:
+            new_expression *= np.double(function[first_index:last_index])
+
     elif char == "+":
         if index != 0:
             added_expressions.append(new_expression)
@@ -75,26 +93,31 @@ while True:
     index += 1
 
 
-print(str(new_expression))
 full_expression = 0
 for expression in added_expressions:
     full_expression += expression
 
+print(isinstance(full_expression, float))
+print(added_expressions)
+
 x_axis = []
 y_axis = []
-for i in range(1, 11):
-    new_y = full_expression.subs(x, i)
-    if new_y == sympy.zoo:
-        break
-    x_axis.append(i)
-    y_axis.append(new_y)
 
-print(full_expression)
-print(added_expressions)
+if not(isinstance(full_expression, float)):
+    for i in range(1, 11):
+        new_y = full_expression.subs(x, i)
+        if new_y == sympy.zoo:
+            break
+        x_axis.append(i)
+        y_axis.append(new_y)
+else:
+    x_axis = range(1, 11)
+    y_axis = np.repeat(full_expression, len(range(1, 11)))
 print(x_axis)
 print(y_axis)
 
 plt.plot(x_axis, y_axis)
 plt.show()
 
-print(np.linspace(1.2, 3, 20))
+strr = "hello"
+print(strr[0:0])

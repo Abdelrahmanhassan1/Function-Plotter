@@ -23,7 +23,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.max_range_value = 0
         self.min_range_value = 0
         self.valid_chars = ["x", "1", "2", "3", "4", "5", "6",
-                            "7", "8", "9", "0", "*", "/", "-", "^", "+"]
+                            "7", "8", "9", "0", "*", "/", "-", "^", "+", ".", " "]
         self.operators = ["*", "/", "^"]
         self.x_symbol = sympy.symbols("x")
 
@@ -63,13 +63,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
             for expression in equation_expressions:
                 full_equation += expression
-            for i in range_values:
-                new_y = full_equation.subs(self.x_symbol, i)
-                # means got infinty value
-                if new_y == sympy.zoo:
-                    break
-                x_axis.append(i)
-                y_axis.append(new_y)
+
+            # check if the expression is a single number
+            if not(isinstance(full_equation, float)):
+                for i in range_values:
+                    new_y = full_equation.subs(self.x_symbol, i)
+                    if new_y == sympy.zoo:
+                        break
+                    x_axis.append(i)
+                    y_axis.append(new_y)
+
+            else:
+                x_axis = range_values
+                y_axis = np.repeat(full_equation, len(range_values))
 
             figure_axes = self.function_plotter_figure.gca()
             figure_axes.cla()
@@ -123,7 +129,24 @@ class MainWindow(QtWidgets.QMainWindow):
                     new_expression /= np.double(function[index])
 
             elif char.isdigit():
-                new_expression *= np.double(char)
+                first_index = index
+                while True:
+                    index += 1
+                    if index == len(function):
+                        break
+                    next_char = function[index]
+                    if next_char.isdigit() or next_char == ".":
+                        continue
+                    else:
+                        break
+
+                last_index = index
+                index -= 1
+                if first_index == last_index:
+                    new_expression *= np.double(function[first_index])
+                else:
+                    new_expression *= np.double(
+                        function[first_index:last_index])
 
             elif char == "+":
                 if index != 0:
