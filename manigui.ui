@@ -17,6 +17,9 @@
    <layout class="QVBoxLayout" name="verticalLayout_9">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -76,7 +79,7 @@ color:white</string>
                 <widget class="QLineEdit" name="function_input">
                  <property name="font">
                   <font>
-                   <pointsize>14</pointsize>
+                   <pointsize>12</pointsize>
                   </font>
                  </property>
                 </widget>
@@ -109,7 +112,7 @@ color:white</string>
                     <widget class="QLineEdit" name="min_value_input">
                      <property name="font">
                       <font>
-                       <pointsize>14</pointsize>
+                       <pointsize>12</pointsize>
                       </font>
                      </property>
                     </widget>
@@ -138,7 +141,7 @@ color:white</string>
                     <widget class="QLineEdit" name="max_value_input">
                      <property name="font">
                       <font>
-                       <pointsize>14</pointsize>
+                       <pointsize>12</pointsize>
                       </font>
                      </property>
                     </widget>
@@ -167,7 +170,7 @@ color:white</string>
                     <widget class="QLineEdit" name="step_value_input">
                      <property name="font">
                       <font>
-                       <pointsize>14</pointsize>
+                       <pointsize>12</pointsize>
                       </font>
                      </property>
                     </widget>
