@@ -54,6 +54,9 @@ class MainWindow(QtWidgets.QMainWindow):
             equation_expressions = self.calculate_function_expression(
                 self.user_function)
 
+            if not equation_expressions:
+                return
+
             range_values = np.arange(
                 self.min_range_value, self.max_range_value+0.000001, self.step_range_value)
 
@@ -157,6 +160,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 if index != 0:
                     added_expressions.append(new_expression)
                 new_expression = -1
+
+            elif char == ".":
+                self.raise_error(
+                    "Floating Numbers must start with Digit. (i.e 0.21)")
+                added_expressions = []
+                new_expression = 1
+                return False
 
             index += 1
         return added_expressions
