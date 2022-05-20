@@ -2,7 +2,9 @@
 
 ### Function Plotter is Gui Python based that takes any function from the user and some range of data and plot it.
 
-### The Gui is implemented with PyQt5 package
+### The GUI is implemented with PyQt5 package
+
+### The GUI is responsive (i.e when the size of window changes all widgets change the size.)
 
 <hr>
 
@@ -40,4 +42,8 @@ python3 main.py
 
 > Project Demo:
 
-<img src="" >
+<img src="./docs/MAIN_GUI.gif" >
+
+> Solving the divide operator error of causing infinity:
+
+<img src="./docs/divide_operator.gif">
